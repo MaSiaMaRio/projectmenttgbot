@@ -13,7 +13,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN", "8146086235:AAFltQPui1QuiEZQyJBL7AowRDzFAvwmF
 WEBAPP_URL = os.getenv("WEBAPP_URL", "https://nalchik-map-production.up.railway.app")
 API_URL = os.getenv("API_URL", "https://nalchik-map-production.up.railway.app")
 DB_PATH = os.path.join(os.path.dirname(__file__), "data.db")
-ADMIN_ID = int(os.getenv("ADMIN_ID", "1118374415"))  # ← замени на свой Telegram ID
+ADMIN_ID = int(os.getenv("ADMIN_ID", "1118374415"))
 
 bot = Bot(
     token=BOT_TOKEN,
@@ -21,7 +21,7 @@ bot = Bot(
 )
 dp = Dispatcher(storage=MemoryStorage())
 
-@dp.message(commands=["start"])
+@dp.message(lambda message: message.text == "/start")
 async def handle_start(message: types.Message):
     user_id = message.from_user.id
     username = message.from_user.username or "—"
@@ -48,7 +48,7 @@ async def handle_start(message: types.Message):
             reply_markup=kb
         )
 
-@dp.message(commands=["give"])
+@dp.message(lambda message: message.text.startswith("/give"))
 async def give_access(message: types.Message):
     if message.from_user.id != ADMIN_ID:
         return await message.answer("⛔ Нет доступа")
