@@ -50,7 +50,7 @@ async def handle_start(message: types.Message):
         kb = InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text="🗺 Открыть карту", web_app=WebAppInfo(url=WEBAPP_URL))]
         ])
-        await message.answer("Добро пожаловать! Открой карту 👇", reply_markup=kb)
+        await message.answer(f"Добро пожаловать! Ваш user_id: {user_id}", reply_markup=kb)
     else:
         kb = InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text="💳 Оплатить доступ", url="https://t.me/YourPaymentBot")]
@@ -90,3 +90,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
