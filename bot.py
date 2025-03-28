@@ -12,7 +12,7 @@ from aiogram.client.default import DefaultBotProperties
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8146086235:AAFltQPui1QuiEZQyJBL7AowRDzFAvwmFvU")
 WEBAPP_URL = os.getenv("WEBAPP_URL", "https://nalchik-map-production.up.railway.app")
 API_URL = os.getenv("API_URL", "https://nalchik-map-production.up.railway.app")
-DB_PATH = os.path.join(os.path.dirname(__file__), "data.db")
+DB_PATH = "/app/data.db"
 ADMIN_ID = int(os.getenv("ADMIN_ID", "1118374415"))
 
 bot = Bot(
