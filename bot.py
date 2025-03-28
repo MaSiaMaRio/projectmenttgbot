@@ -21,6 +21,20 @@ bot = Bot(
 )
 dp = Dispatcher(storage=MemoryStorage())
 
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            user_id TEXT PRIMARY KEY,
+            username TEXT,
+            paid INTEGER DEFAULT 0,
+            expires_at TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
 @dp.message(lambda message: message.text == "/start")
 async def handle_start(message: types.Message):
     user_id = message.from_user.id
@@ -70,6 +84,7 @@ async def give_access(message: types.Message):
     await message.answer(f"✅ Доступ выдан пользователю {user_id} до {expires[:10]}")
 
 async def main():
+    init_db()
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
