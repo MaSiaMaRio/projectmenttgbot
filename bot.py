@@ -31,9 +31,12 @@ async def handle_start(message: types.Message):
         access = False
 
     if access:
-        kb = InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text="🗺 Открыть карту", web_app=WebAppInfo(url=WEBAPP_URL))]
-        ])
+        kb =InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="Открыть карту",web_app=WebAppInfo(url="https://nalchik-map-production.up.railway.app/")
+        )
+    ]
+])
+
         await message.answer(f"Добро пожаловать! Ваш user_id: {user_id}", reply_markup=kb)
     else:
         kb = InlineKeyboardMarkup(inline_keyboard=[
